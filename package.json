@@ -1,0 +1,22 @@
+{
+  "name": "webpage-change-tracker",
+  "version": "1.0.0",
+  "description": "track if a webpage has changed since the first time you checked it",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kwuzy/webpage-change-tracker.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kwuzy/webpage-change-tracker/issues"
+  },
+  "homepage": "https://github.com/kwuzy/webpage-change-tracker#readme",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
