@@ -17,7 +17,9 @@
   },
   "homepage": "https://github.com/kwuzy/webpage-change-tracker#readme",
   "dependencies": {
+    "axios": "^1.7.9",
     "body-parser": "^1.20.3",
+    "cheerio": "^1.0.0",
     "express": "^4.21.2"
   }
 }
