@@ -41,6 +41,8 @@ const tryToAddNewPageDictionaryElement = (url, hash) => {
     return true;
 };
 
+const getPageDictionaryList = () => Object.keys(pageDictionary);
+
 const getPageContent = async (url) => {
     try {
         const response = await axios.get(url, {
@@ -68,5 +70,6 @@ module.exports = {
     hashString,
     loadPageDictionary,
     tryToAddNewPageDictionaryElement,
+    getPageDictionaryList,
     getPageContent,
 };

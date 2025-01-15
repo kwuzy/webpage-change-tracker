@@ -7,6 +7,7 @@ const {
     ensureValidHttpUrl,
     hashString,
     tryToAddNewPageDictionaryElement,
+    getPageDictionaryList,
     getPageContent } = require('./helper.js');
 
 router.post('/add', async (req, res) => {
@@ -28,7 +29,7 @@ router.post('/add', async (req, res) => {
 });
 
 router.get('/list', (req, res) => {
-    res.json(pageDictionary);
+    res.json(getPageDictionaryList());
 });
 
 module.exports = router;
