@@ -1,12 +1,14 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const routes = require('./routes.js');
+const { loadPageDictionary } = require('./helper.js');
 
 const app = express();
 app.use(bodyParser.json());
 
 const PORT = 3000;
 
+loadPageDictionary();
 app.use('/', routes);
 
 app.listen(PORT, () => {
