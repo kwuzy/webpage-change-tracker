@@ -43,6 +43,21 @@ const tryToAddNewPageDictionaryElement = (url, hash) => {
 
 const getPageDictionaryList = () => Object.keys(pageDictionary);
 
+const checkPage = async (url) => {
+    try {
+        const pageContent = await getPageContent(url);
+        const shortenedUrl = removeHttpUrl(url);
+        const pageHash = hashString(pageContent);
+        if (shortenedUrl in pageDictionary) {
+            return pageDictionary[shortenedUrl] === pageHash;
+        } else {
+            throw new Error('Page not tracked');
+        }
+    } catch (error) {
+        return { error: error.message };
+    }
+};
+
 const getPageContent = async (url) => {
     try {
         const response = await axios.get(url, {
@@ -71,5 +86,6 @@ module.exports = {
     loadPageDictionary,
     tryToAddNewPageDictionaryElement,
     getPageDictionaryList,
+    checkPage,
     getPageContent,
 };

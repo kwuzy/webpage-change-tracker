@@ -8,7 +8,8 @@ const {
     hashString,
     tryToAddNewPageDictionaryElement,
     getPageDictionaryList,
-    getPageContent } = require('./helper.js');
+    checkPage,
+    getPageContent, } = require('./helper.js');
 
 router.post('/add', async (req, res) => {
     const { url } = req.body;
@@ -30,6 +31,21 @@ router.post('/add', async (req, res) => {
 
 router.get('/list', (req, res) => {
     res.json(getPageDictionaryList());
+});
+
+router.get('/check', async (req, res) => {
+    const { url } = req.body;
+    const validUrl = ensureValidHttpUrl(url);
+    if (!validUrl) return res.status(400).json({ error: 'No URL' });
+    try {
+        const doesPageMatch = await checkPage(validUrl);
+        res.json({ doesPageMatch: doesPageMatch });
+    } catch (error) {
+        res.json({ error: error.message });
+    }
+});
+
+router.get('/checkAll', async (req, res) => {
 });
 
 module.exports = router;
