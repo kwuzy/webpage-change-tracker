@@ -4,16 +4,18 @@ const router = express.Router();
 
 const {
     removeHttpUrl,
+    ensureValidHttpUrl,
     hashString,
     tryToAddNewPageDictionaryElement,
     getPageContent } = require('./helper.js');
 
 router.post('/add', async (req, res) => {
     const { url } = req.body;
-    if (!url) return res.status(400).json({ error: 'No URL' });
+    const validUrl = ensureValidHttpUrl(url);
+    if (!validUrl) return res.status(400).json({ error: 'No URL' });
     try {
-        const pageContent = await getPageContent(url);
-        const shortenedUrl = removeHttpUrl(url);
+        const pageContent = await getPageContent(validUrl);
+        const shortenedUrl = removeHttpUrl(validUrl);
         const pageHash = hashString(pageContent);
         if (tryToAddNewPageDictionaryElement(shortenedUrl, pageHash)) {
             res.json({ newPageAdded: pageHash });
@@ -23,6 +25,10 @@ router.post('/add', async (req, res) => {
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
+});
+
+router.get('/list', (req, res) => {
+    res.json(pageDictionary);
 });
 
 module.exports = router;

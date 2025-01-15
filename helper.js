@@ -12,6 +12,11 @@ const removeHttpUrl = (str) => {
     return newUrl;
 }
 
+const ensureValidHttpUrl = (str) => {
+    if (!str.startsWith("http://") && !str.startsWith("https://")) str = "https://" + str;
+    return str;
+}
+
 const hashString = (str) => {
     return crypto.createHash('sha256').update(str).digest('hex');
 };
@@ -59,6 +64,7 @@ const getPageContent = async (url) => {
 
 module.exports = {
     removeHttpUrl,
+    ensureValidHttpUrl,
     hashString,
     loadPageDictionary,
     tryToAddNewPageDictionaryElement,
