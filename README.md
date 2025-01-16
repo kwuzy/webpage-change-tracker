@@ -10,9 +10,9 @@ This is a simple solution that pulls all the text content from a webpage - ignor
 # Setup
 
 ## Prerequisites
-1. Node
-2. Some CLI - Command Prompt or Terminal work
-3. Preferred - a lightweight API client like Postman, cURL commands work as well
+1. Node.js
+2. Some CLI. The instructions provided are for terminal
+3. Optional: A lightweight API client like Postman, cURL commands work as well
 
 ## All-in-One setup command in terminal
 ```
