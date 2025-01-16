@@ -1,5 +1,5 @@
-# Webpage-change-tracker
-Track if a webpage has changed since the first time you checked it.
+# Simple Webpage Change Tracker
+Track if a webpage's text content has changed since the first time you checked it.
 
 ## Description
 You might be watching prices, waiting for tickets to drop, when a new schedule updates, or if a job application page will update.
