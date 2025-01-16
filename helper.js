@@ -41,6 +41,20 @@ const tryToAddNewPageDictionaryElement = (url, hash) => {
     return true;
 };
 
+const updatePageDictionaryElement = (url, hash) => {
+    pageDictionary[url] = hash;
+    savePageDictionary();
+};
+
+const tryToDeletePageDictionaryElement = (url) => {
+    if (pageDictionary[url]) {
+        delete pageDictionary[url];
+        savePageDictionary();
+        return true;
+    }
+    return false;
+};
+
 const getPageDictionaryList = () => Object.keys(pageDictionary);
 
 const checkPage = async (url) => {
@@ -88,6 +102,8 @@ module.exports = {
     hashString,
     loadPageDictionary,
     tryToAddNewPageDictionaryElement,
+    updatePageDictionaryElement,
+    tryToDeletePageDictionaryElement,
     getPageDictionaryList,
     checkPage,
     getPageContent,

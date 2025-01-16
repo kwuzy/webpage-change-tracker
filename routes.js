@@ -7,6 +7,8 @@ const {
     ensureValidHttpUrl,
     hashString,
     tryToAddNewPageDictionaryElement,
+    updatePageDictionaryElement,
+    tryToDeletePageDictionaryElement,
     getPageDictionaryList,
     checkPage,
     getPageContent, } = require('./helper.js');
@@ -23,7 +25,7 @@ router.post('/add', async (req, res) => {
         const shortenedUrl = removeHttpUrl(validUrl);
         const pageHash = hashString(pageContent);
         if (tryToAddNewPageDictionaryElement(shortenedUrl, pageHash)) {
-            res.json({ newPageAdded: shortenedUrl });
+            res.status(201).json({ newPageAdded: shortenedUrl });
         } else {
             res.status(409).json({ pageAlreadyExists: shortenedUrl });
         }
@@ -72,6 +74,40 @@ router.get('/checkAll', async (req, res) => {
         }
     }
     res.json(pageStatus);
+});
+
+router.put('/update', async (req, res) => {
+    const { url } = req.body;
+    const validUrl = ensureValidHttpUrl(url);
+    if (!validUrl) return res.status(400).json({ error: 'No URL' });
+    try {
+        const pageContent = await getPageContent(validUrl);
+        if (pageContent.error) {
+            throw new Error(pageContent.error);
+        }
+        const shortenedUrl = removeHttpUrl(validUrl);
+        const pageHash = hashString(pageContent);
+        if (tryToAddNewPageDictionaryElement(shortenedUrl, pageHash)) {
+            res.status(201).json({ newPageAdded: shortenedUrl });
+        } else {
+            updatePageDictionaryElement(shortenedUrl, pageHash);
+            res.json({ pageUpdated: shortenedUrl });
+        }
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+router.delete('/delete', (req, res) => {
+    const { url } = req.body;
+    const validUrl = ensureValidHttpUrl(url);
+    if (!validUrl) return res.status(400).json({ error: 'No URL' });
+    const shortenedUrl = removeHttpUrl(url);
+    if (tryToDeletePageDictionaryElement(shortenedUrl)) {
+        res.json({ pageDeleted: shortenedUrl });
+    } else {
+        res.status(404).json({ error: 'Page not tracked' });
+    }
 });
 
 module.exports = router;
