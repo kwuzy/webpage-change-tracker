@@ -43,11 +43,15 @@ Server is running if you see `Server is running on port 3000.` in the terminal
 
 # Commands
 Endpoint: `http://localhost:3000`
+
+Header: `Content-Type: application/x-www-form-urlencoded`
+
 Body:
-    key: url
-    value: somesite.com
+| Key  | Value |
+| ------------- | ------------- |
+| url  | some-site.com  |
 ## POST - add new sites
-1. `/add`
+### `/add`
 
 Example:
 ```
@@ -57,11 +61,12 @@ curl -X POST 'http://localhost:3000/add' \
 ```
 
 ## GET - list your sites, check a site, or check all sites
-1. `/list`
-2. `/check`
-3. `/checkAll`
+### `/list`
+### `/check`
+### `/checkAll`
 
 Examples:
+
 List
 ```
 curl -X GET 'http://localhost:3000/list' \
@@ -76,12 +81,11 @@ curl -X GET 'http://localhost:3000/check' \
 Check All
 ```
 curl -X GET 'http://localhost:3000/checkAll' \
---header 'Content-Type: application/x-www-form-urlencoded' \
---data-urlencode 'url=example.com'
+--header 'Content-Type: application/x-www-form-urlencoded'
 ```
 
 ## PUT - add or update an existing site
-1. `/update`
+### `/update`
 
 Example:
 Update
@@ -92,7 +96,7 @@ curl -X PUT 'http://localhost:3000/update' \
 ```
 
 ## DELETE - remove a site you're tracking
-1. `/delete`
+### `/delete`
 
 Example:
 Update
