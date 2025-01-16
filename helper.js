@@ -46,6 +46,9 @@ const getPageDictionaryList = () => Object.keys(pageDictionary);
 const checkPage = async (url) => {
     try {
         const pageContent = await getPageContent(url);
+        if (pageContent.error) {
+            throw new Error(pageContent.error);
+        }
         const shortenedUrl = removeHttpUrl(url);
         const pageHash = hashString(pageContent);
         if (shortenedUrl in pageDictionary) {

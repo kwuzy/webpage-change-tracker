@@ -4,7 +4,7 @@ const routes = require('./routes.js');
 const { loadPageDictionary } = require('./helper.js');
 
 const app = express();
-app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 const PORT = 3000;
 

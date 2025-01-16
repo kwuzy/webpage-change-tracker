@@ -17,6 +17,9 @@ router.post('/add', async (req, res) => {
     if (!validUrl) return res.status(400).json({ error: 'No URL' });
     try {
         const pageContent = await getPageContent(validUrl);
+        if (pageContent.error) {
+            throw new Error(pageContent.error);
+        }
         const shortenedUrl = removeHttpUrl(validUrl);
         const pageHash = hashString(pageContent);
         if (tryToAddNewPageDictionaryElement(shortenedUrl, pageHash)) {
@@ -39,9 +42,16 @@ router.get('/check', async (req, res) => {
     if (!validUrl) return res.status(400).json({ error: 'No URL' });
     try {
         const doesPageMatch = await checkPage(validUrl);
+        if (doesPageMatch.error) {
+            if (doesPageMatch.error === 'Page not tracked') {
+                return res.status(404).json({ error: 'Page not tracked' });
+            } else {
+                throw new Error(doesPageMatch.error);
+            }
+        }
         res.json({ doesPageMatch: doesPageMatch });
     } catch (error) {
-        res.json({ error: error.message });
+        res.status(500).json({ error: error.message });
     }
 });
 
