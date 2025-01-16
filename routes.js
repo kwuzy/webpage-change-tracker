@@ -23,9 +23,9 @@ router.post('/add', async (req, res) => {
         const shortenedUrl = removeHttpUrl(validUrl);
         const pageHash = hashString(pageContent);
         if (tryToAddNewPageDictionaryElement(shortenedUrl, pageHash)) {
-            res.json({ newPageAdded: pageHash });
+            res.json({ newPageAdded: shortenedUrl });
         } else {
-            res.status(409).json({ pageAlreadyExists: pageHash });
+            res.status(409).json({ pageAlreadyExists: shortenedUrl });
         }
     } catch (error) {
         res.status(500).json({ error: error.message });
