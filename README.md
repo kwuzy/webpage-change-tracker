@@ -26,7 +26,7 @@ node app.js
 ```
 git clone https://github.com/kwuzy/webpage-change-tracker.git
 ```
-2. Cd into the repo
+2. Change directory into the repo
 ```
 cd webpage-change-tracker
 ```
