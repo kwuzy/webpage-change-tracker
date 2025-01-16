@@ -56,6 +56,22 @@ router.get('/check', async (req, res) => {
 });
 
 router.get('/checkAll', async (req, res) => {
+    const pageList = getPageDictionaryList();
+    const pageStatus = {};
+    for (let page of pageList) {
+        const validUrl = ensureValidHttpUrl(page);
+        if (validUrl) {
+            const doesPageMatch = await checkPage(validUrl);
+            if (doesPageMatch.error) {
+                pageStatus[page] = doesPageMatch.error;
+            } else {
+                pageStatus[page] = doesPageMatch;
+            }
+        } else {
+            pageStatus[page] = 'Invalid URL';
+        }
+    }
+    res.json(pageStatus);
 });
 
 module.exports = router;
