@@ -62,7 +62,7 @@ curl -X POST 'http://localhost:8080/add' \
 
 ## GET - list your sites, check a site, or check all sites
 ### `/list`
-### `/check`
+### `/check?url=domainToTrack.tld`
 ### `/checkAll`
 
 Examples:
@@ -74,9 +74,8 @@ curl -X GET 'http://localhost:8080/list' \
 ```
 Check
 ```
-curl -X GET 'http://localhost:8080/check' \
---header 'Content-Type: application/x-www-form-urlencoded' \
---data-urlencode 'url=example.com'
+curl --location 'http://localhost:8080/check?url=example.com' \
+--header 'Content-Type: application/json'
 ```
 Check All
 ```
