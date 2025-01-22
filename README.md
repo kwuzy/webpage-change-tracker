@@ -19,7 +19,7 @@ This is a simple solution that pulls all the text content from a webpage - ignor
 git clone https://github.com/kwuzy/webpage-change-tracker.git &&
 cd webpage-change-tracker &&
 npm i &&
-node app.js
+node api.js
 ```
 ## Step by step
 1. Clone the repo
@@ -36,7 +36,7 @@ npm i
 ```
 4. Run server
 ```
-node app.js
+node api.js
 ```
 
 Server is running if you see `Server is running on port 3000.` in the terminal
