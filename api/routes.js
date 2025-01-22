@@ -39,7 +39,7 @@ router.get('/list', (req, res) => {
 });
 
 router.get('/check', async (req, res) => {
-    const { url } = req.body;
+    const { url } = req.query;
     const validUrl = ensureValidHttpUrl(url);
     if (!validUrl) return res.status(400).json({ error: 'No URL' });
     try {
@@ -100,6 +100,7 @@ router.put('/update', async (req, res) => {
 
 router.delete('/delete', (req, res) => {
     const { url } = req.body;
+    console.log("Received request body:", req.body);
     const validUrl = ensureValidHttpUrl(url);
     if (!validUrl) return res.status(400).json({ error: 'No URL' });
     const shortenedUrl = removeHttpUrl(url);

@@ -14,9 +14,14 @@ const removeHttpUrl = (str) => {
 }
 
 const ensureValidHttpUrl = (str) => {
-    if (!str.startsWith("http://") && !str.startsWith("https://")) str = "https://" + str;
+    if (!str || typeof str !== "string") {
+        return null;
+    }
+    if (!str.startsWith("http://") && !str.startsWith("https://")) {
+        str = "https://" + str;
+    }
     return str;
-}
+};
 
 const hashString = (str) => {
     return crypto.createHash('sha256').update(str).digest('hex');
