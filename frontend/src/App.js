@@ -15,12 +15,11 @@ function App() {
   // Function to load URLs from the backend
   const loadUrls = async () => {
     try {
-        const response = await listUrls();  // Calls the API function
-        console.log("Fetched URLs:", response.data);  // ✅ Debug output
+        const response = await listUrls(); 
         setUrls(Array.isArray(response.data) ? response.data : []);
     } catch (err) {
         console.error("Error loading URLs", err);
-        setUrls([]);  // Fallback to empty array
+        setUrls([]);
     }
   };
 
@@ -64,7 +63,7 @@ function App() {
   const handleDelete = async (url) => {
     try {
       await deleteUrl(url);
-      loadUrls(); // Refresh list after deletion
+      loadUrls();
     } catch (err) {
       setStatus((prev) => ({ ...prev, [url]: "Delete failed" }));
     }
