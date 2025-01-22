@@ -6,7 +6,7 @@ const { loadPageDictionary } = require('./helper.js');
 const api = express();
 api.use(bodyParser.urlencoded({ extended: true }));
 
-const PORT = 3000;
+const PORT = 8080;
 
 loadPageDictionary();
 api.use('/', routes);

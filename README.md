@@ -18,8 +18,8 @@ This is a simple solution that pulls all the text content from a webpage - ignor
 ```
 git clone https://github.com/kwuzy/webpage-change-tracker.git &&
 cd webpage-change-tracker &&
-npm i &&
-node api.js
+npm run install-all &&
+npm start
 ```
 ## Step by step
 1. Clone the repo
@@ -30,19 +30,19 @@ git clone https://github.com/kwuzy/webpage-change-tracker.git
 ```
 cd webpage-change-tracker
 ```
-3. Install node dependencies
+3. Install all dependencies
 ```
-npm i
+npm run install-all
 ```
-4. Run server
+4. Run client and server
 ```
-node api.js
+npm start
 ```
 
-Server is running if you see `Server is running on port 3000.` in the terminal
+Server is running if you see `Server is running on port 8080.` in the terminal
 
-# Commands
-Endpoint: `http://localhost:3000`
+# Server Commands
+Endpoint: `http://localhost:8080`
 
 Header: `Content-Type: application/x-www-form-urlencoded`
 
@@ -55,7 +55,7 @@ Body:
 
 Example:
 ```
-curl -X POST 'http://localhost:3000/add' \
+curl -X POST 'http://localhost:8080/add' \
 --header 'Content-Type: application/x-www-form-urlencoded' \
 --data-urlencode 'url=example.com'
 ```
@@ -69,18 +69,18 @@ Examples:
 
 List
 ```
-curl -X GET 'http://localhost:3000/list' \
+curl -X GET 'http://localhost:8080/list' \
 --header 'Content-Type: application/x-www-form-urlencoded'
 ```
 Check
 ```
-curl -X GET 'http://localhost:3000/check' \
+curl -X GET 'http://localhost:8080/check' \
 --header 'Content-Type: application/x-www-form-urlencoded' \
 --data-urlencode 'url=example.com'
 ```
 Check All
 ```
-curl -X GET 'http://localhost:3000/checkAll' \
+curl -X GET 'http://localhost:8080/checkAll' \
 --header 'Content-Type: application/x-www-form-urlencoded'
 ```
 
@@ -90,7 +90,7 @@ curl -X GET 'http://localhost:3000/checkAll' \
 Example:
 Update
 ```
-curl -X PUT 'http://localhost:3000/update' \
+curl -X PUT 'http://localhost:8080/update' \
 --header 'Content-Type: application/x-www-form-urlencoded' \
 --data-urlencode 'url=example.com'
 ```
@@ -101,7 +101,7 @@ curl -X PUT 'http://localhost:3000/update' \
 Example:
 Update
 ```
-curl -X DELETE 'http://localhost:3000/delete' \
+curl -X DELETE 'http://localhost:8080/delete' \
 --header 'Content-Type: application/x-www-form-urlencoded' \
 --data-urlencode 'url=example.com'
 ```

@@ -4,7 +4,12 @@
   "description": "track if a webpage has changed since the first time you checked it",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "node ./api/api.js",
+    "client": "cd ./frontend && npm start",
+    "install-server": "npm install",
+    "install-client": "cd ./frontend && npm install",
+    "install-all": "npm run install-server && npm run install-client"
   },
   "repository": {
     "type": "git",
@@ -20,8 +25,12 @@
     "axios": "^1.7.9",
     "body-parser": "^1.20.3",
     "cheerio": "^1.0.0",
+    "cra-template": "1.2.0",
     "crypto": "^1.0.1",
     "express": "^4.21.2",
     "fs": "^0.0.1-security"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
   }
 }

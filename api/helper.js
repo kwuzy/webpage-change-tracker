@@ -2,8 +2,9 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 const fs = require('fs');
 const crypto = require('crypto');
+const path = require('path');
 
-const FILE_PATH = './watchPages.txt';
+const FILE_PATH = path.join(__dirname, 'watchPages.txt');
 
 let pageDictionary = {};
 
