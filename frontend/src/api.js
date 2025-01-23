@@ -2,17 +2,64 @@ import axios from "axios";
 
 const API_BASE_URL = "http://localhost:8080";
 
-export const addUrl = (url) => axios.post(`${API_BASE_URL}/add`, { url });
+const handleApiError = (error, action) => {
+    console.error(`Error during ${action}:`, error.response?.data || error.message);
+    return { error: true, message: error.response?.data?.error || `Failed to ${action}. Please try again.` };
+};
 
-export const listUrls = () => axios.get(`${API_BASE_URL}/list`);
+export const addUrl = async (url) => {
+    try {
+        const response = await axios.post(`${API_BASE_URL}/add`, { url });
+        return response;
+    } catch (error) {
+        handleApiError(error, "adding URL");
+    }
+};
 
-export const checkUrl = (url) => axios.get(`${API_BASE_URL}/check`, { params: { url } });
+export const listUrls = async () => {
+    try {
+        const response = await axios.get(`${API_BASE_URL}/list`);
+        return response;
+    } catch (error) {
+        handleApiError(error, "listing URLs");
+    }
+};
 
-export const checkAllUrls = () => axios.get(`${API_BASE_URL}/checkAll`);
+export const checkUrl = async (url) => {
+    try {
+        const response = await axios.get(`${API_BASE_URL}/check`, { params: { url } });
+        return response;
+    } catch (error) {
+        handleApiError(error, `checking URL: ${url}`);
+    }
+};
 
-export const updateUrl = (url) => axios.put(`${API_BASE_URL}/update`, { url });
+export const checkAllUrls = async () => {
+    try {
+        const response = await axios.get(`${API_BASE_URL}/checkAll`);
+        return response;
+    } catch (error) {
+        handleApiError(error, "checking all URLs");
+    }
+};
 
-export const deleteUrl = (url) => axios.delete(`${API_BASE_URL}/delete`, {
-    data: { url },
-    headers: { "Content-Type": "application/json" }
-});
+export const updateUrl = async (url) => {
+    try {
+        const response = await axios.put(`${API_BASE_URL}/update`, { url });
+        return response;
+    } catch (error) {
+        handleApiError(error, `updating URL: ${url}`);
+    }
+};
+
+export const deleteUrl = async (url) => {
+    try {
+        const response = await axios.delete(`${API_BASE_URL}/delete`, {
+            data: { url },
+            headers: { "Content-Type": "application/json" }
+        });
+        return response;
+    } catch (error) {
+        handleApiError(error, `deleting URL: ${url}`);
+    }
+};
