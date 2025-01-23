@@ -1,6 +1,10 @@
 # Simple Webpage Change Tracker
 Track if a webpage's text content has changed since the first time you checked it.
 
+<img width="868" alt="Untitled" src="https://github.com/user-attachments/assets/ee4a8957-1fc9-4a61-9ba1-e8a61edd9e27" />
+<img width="869" alt="Untitled 2" src="https://github.com/user-attachments/assets/7144d38f-9ff6-4504-841d-53785326ecf5" />
+
+
 ## Description
 You might be watching prices, waiting for tickets to drop, when a new schedule updates, or if a job application page will update.
 Add websites to track and check if they've changed.
@@ -39,14 +43,16 @@ npm run install-all
 npm start
 ```
 
-Server is running if you see `Server is running on port 8080.` in the terminal
+The page should open on it's own but if it doesn't navigate to `http://localhost:3000` on your browser
 
 # Server Commands
+If you just want to run the server you can do that too with `npm run server`
+
 Endpoint: `http://localhost:8080`
 
 Header: `Content-Type: application/x-www-form-urlencoded`
 
-Body:
+Param or Body:
 | Key  | Value |
 | ------------- | ------------- |
 | url  | some-site.com  |
@@ -62,7 +68,7 @@ curl -X POST 'http://localhost:8080/add' \
 
 ## GET - list your sites, check a site, or check all sites
 ### `/list`
-### `/check?url=domainToTrack.tld`
+### `/check?url=some-site.com`
 ### `/checkAll`
 
 Examples:
@@ -106,4 +112,4 @@ curl -X DELETE 'http://localhost:8080/delete' \
 ```
 
 # For the extra curious
-This runs a node server locally and lets you use a series of endpoints to update a dictionary. The dictionary is stored as a txt file locally - I didn't want to spin up a database since that would require folks to do extra setup. At it's core I'm grabbing the text content only (no html tags, no scripts, no css) from the `body` and trimming extra spaces. I take that string and I hash it, this is stored into the map as the value for the url. Checking if the page has changed is as simple as checking if the hashes are equal.
+This runs a React frontend and a node server locally and lets you use a series of endpoints to update a dictionary. The dictionary is stored as a txt file locally - I didn't want to spin up a database since that would require folks to do extra setup. At it's core I'm grabbing the text content only (no html tags, no scripts, no css) from the `body` and trimming extra spaces. I take that string and I hash it, this is stored into the map as the value for the url. Checking if the page has changed is as simple as checking if the hashes are equal.
