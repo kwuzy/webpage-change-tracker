@@ -15,18 +15,14 @@ function UrlList({ urls, onCheck, onUpdate, onDelete, status }) {
                         <span 
                             style={{ 
                                 fontWeight: "bold", 
-                                color: status[url] === undefined 
-                                    ? "black"  // Unchecked
-                                    : status[url] 
-                                        ? "red"  // Unchanged
-                                        : "green" // Changed
+                                color: status[url] === undefined || status[url] === "Unchecked"
+                                    ? "black"
+                                    : status[url] === "Unchanged"
+                                        ? "red"
+                                        : "green"
                             }}
                         >
-                            {status[url] === undefined 
-                                ? "Unchecked" 
-                                : status[url] 
-                                    ? "Unchanged" 
-                                    : "Changed"}
+                            {status[url] || "Unchecked"}
                         </span>
                         <button onClick={() => onCheck(url)}>Check</button>
                         <button onClick={() => onUpdate(url)}>Update</button>

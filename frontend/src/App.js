@@ -27,9 +27,10 @@ function App() {
   const handleCheck = async (url) => {
     try {
       const response = await checkUrl(url);
+      const updatedStatus = response.data.doesPageMatch === true ? "Unchanged" : "Changed";
       setStatus((prev) => ({
         ...prev,
-        [url]: response.data.doesPageMatch ? "Unchanged" : "Changed"
+        [url]: updatedStatus,
       }));
     } catch (err) {
       setStatus((prev) => ({ ...prev, [url]: "Error checking" }));
@@ -40,9 +41,13 @@ function App() {
   const handleCheckAll = async () => {
     try {
         const response = await checkAllUrls();
+        const updatedStatuses = {};
+        for (const url in response.data) {
+            updatedStatuses[url] = response.data[url] === true ? "Unchanged" : "Changed";
+        }
         setStatus((prevStatus) => ({
             ...prevStatus,
-            ...response.data
+            ...updatedStatuses,
         }));
     } catch (err) {
         console.error("Failed to check all URLs", err);
